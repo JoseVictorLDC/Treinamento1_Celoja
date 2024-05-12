@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import os
 
 # caminhoArquivo = "dadosFarmaPonte/dadosFarmaPonteMamae-e-bebe.json"
 
@@ -66,7 +67,17 @@ def retornaTempoDeExecucaoFormatado(tempoExecucao):
         if minutos > 60:
             horas = minutos // 60
             minutos = minutos % minutos
-            return f"Tempo de extração: {horas} horas, {minutos} minutos e {segundos} segundos."
+            if horas > 1:
+                return f"Tempo de extração: {horas} horas, {minutos} minutos e {segundos} segundos."
+            else:
+                return f"Tempo de extração: {horas} hora, {minutos} minutos e {segundos} segundos."
         else:
             return f"Tempo de extração: {minutos} minutos e {segundos} segundos."
     else: return f"Tempo de extração: {segundos} segundos."
+
+def limpaTela():
+    sistema = os.name
+    if sistema == "nt":
+        os.system('cls') # Para Windows
+    else:
+        os.system('clear') # Para Linux
