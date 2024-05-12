@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-caminhoArquivo = "dadosFarmaPonte/dadosFarmaPonteMamae-e-bebe.json"
+# caminhoArquivo = "dadosFarmaPonte/dadosFarmaPonteMamae-e-bebe.json"
 
 # Verifica quantos produtos foram gravados.
 def verificaQuantidadeItens(caminhoArquivo):
@@ -10,8 +10,8 @@ def verificaQuantidadeItens(caminhoArquivo):
         dados = json.load(arquivo)
     return len(dados)
 
-if __name__ == "__main__":
-    print(verificaQuantidadeItens(caminhoArquivo))
+# if __name__ == "__main__":
+#     print(verificaQuantidadeItens(caminhoArquivo))
 
 # Coleta as categorias dos produtos.
 def coletaCategorias():
@@ -29,12 +29,13 @@ def coletaCategorias():
     return categorias
 
 # Imprime algumas estatísticas sobre a extração.
-def finalizaExtracao(numPaginas, caminhoArquivo):
-    print(f"Extração finalizada com sucesso!")
+def finalizaExtracao(numPaginas, caminhoArquivoJSON, caminhoArquivoCSV, tempoExecucaoFormatado):
+    print(f"Extração finalizada com sucesso!\n")
     print(f"Estatísticas:")
     print(f"- {numPaginas} páginas")
-    print(f"- {verificaQuantidadeItens(caminhoArquivo)} produtos")
-    print(f"Confira os dados no arquivo, {caminhoArquivo}")
+    print(f"- {verificaQuantidadeItens(caminhoArquivoJSON)} produtos")
+    print(f"{tempoExecucaoFormatado}\n")
+    print(f"Confira os dados no arquivo {caminhoArquivoJSON} ou {caminhoArquivoCSV}\n")
 
 # Solicita ao usuário para que informe a categoria que ele deseja a extração.
 def escolheCategoria():
@@ -56,3 +57,16 @@ def retornaNumeroDePaginas(categoria):
     paginaHtml = BeautifulSoup(textoHtml, 'lxml')
     numPaginas = int(paginaHtml.find_all("div", class_="text-center pt-3")[-1].text.split()[-1])
     return numPaginas
+
+def retornaTempoDeExecucaoFormatado(tempoExecucao):
+    segundos = round(tempoExecucao)
+    if segundos > 60:
+        minutos = segundos // 60
+        segundos = segundos % 60
+        if minutos > 60:
+            horas = minutos // 60
+            minutos = minutos % minutos
+            return f"Tempo de extração: {horas} horas, {minutos} minutos e {segundos} segundos."
+        else:
+            return f"Tempo de extração: {minutos} minutos e {segundos} segundos."
+    else: return f"Tempo de extração: {segundos} segundos."

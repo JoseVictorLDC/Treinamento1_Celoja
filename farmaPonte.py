@@ -2,9 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import os
-from funcsAux import finalizaExtracao, escolheCategoria
+import time
+import pandas as pd
+from funcoesAuxiliares import finalizaExtracao, escolheCategoria, retornaTempoDeExecucaoFormatado
 
 def extracaoDeDados(categoria="saude"):
+    inicio = time.time()
     # Pega o número de páginas da categoria.
     textoHtml = requests.get(f'https://www.farmaponte.com.br/{categoria}/').text
     paginaHtml = BeautifulSoup(textoHtml, 'lxml')
@@ -61,29 +64,38 @@ def extracaoDeDados(categoria="saude"):
                 "Desconto": desconto,
                 "Preco unitario": precoUnitario,
                 "SKU": sku,
-                "Preco PIX": precoPix,
-                "Preco Venda": precoVenda,
-                "url": url,
-                "ean": ean,
+                "Preco pix": precoPix,
+                "Preco venda": precoVenda,
+                "URL": url,
+                "EAN": ean,
                 "Marca": marca,
             })
             produtosExtraidos += 1
             progressoTotal = ((paginasExtraidas + (produtosExtraidos/len(produtos)))/ numPaginas) * 100
-            os.system('clear')
+            os.system('clear') # Para Linux
+            os.system('cls') # Para Windows
             print("Iniciando extração dos produtos")
             print(f"url: https://www.farmaponte.com.br/{categoria}/")
-            print(f"Progresso da extração: {progressoTotal:.2f}%")
+            print(f"Progresso da extração: {progressoTotal:.2f}%\n")
         paginasExtraidas += 1
 
 
-    # Define o caminho do arquivo no qual serão gravados os dados.
-    caminhoArquivo = f"dadosFarmaPonte/dadosFarmaPonte{categoria.capitalize()}.json"
+    # Define o caminho do arquivo no qual serão gravados os dados json.
+    caminhoArquivoJSON = f"dadosFarmaPonte/dadosJSON/dadosFarmaPonte{categoria.capitalize()}.json"
 
     # Grava os dados em formato JSON.
-    with open(caminhoArquivo, 'w') as arquivo:
+    with open(caminhoArquivoJSON, 'w') as arquivo:
         json.dump(dados, arquivo, indent=4)
 
-    finalizaExtracao(numPaginas, caminhoArquivo)
+    # Grava os dados em formato XLSX.
+    df = pd.DataFrame(dados)
+    caminhoArquivoExcel = f"dadosFarmaPonte/dadosXLSX/dadosFarmaPonte{categoria.capitalize()}.xlsx"
+    df.to_excel(caminhoArquivoExcel, index=False)
+
+    fim = time.time()
+    tempoExecucao = fim - inicio
+    tempoExecucaoFormatado = retornaTempoDeExecucaoFormatado(tempoExecucao=tempoExecucao)
+    finalizaExtracao(numPaginas, caminhoArquivoJSON, caminhoArquivoExcel, tempoExecucaoFormatado)
 
 categoriaEscolhida = escolheCategoria()
 
