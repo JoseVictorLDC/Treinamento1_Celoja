@@ -506,17 +506,6 @@
         "Marca": "Iridium"
     },
     {
-        "Nome do produto": "Go Energy Now Gel Guarana Com Acai 30gr",
-        "Desconto": 10,
-        "Preco unitario": 4.82,
-        "SKU": "25480",
-        "Preco pix": 4.21,
-        "Preco venda": 4.34,
-        "URL": "https://www.farmaponte.com.br/go-energy-now-gel-guarana-com-acai-30gr/p",
-        "EAN": "7899621106573",
-        "Marca": "Sem marca"
-    },
-    {
         "Nome do produto": "Whey 100  Pote Cookies 900GR Integralmedica",
         "Desconto": 10,
         "Preco unitario": 184.44,
@@ -649,28 +638,6 @@
         "Marca": "Sem marca"
     },
     {
-        "Nome do produto": "Isot\u00f4nico Powerade Lim\u00e3o 500ml",
-        "Desconto": 10,
-        "Preco unitario": 6.99,
-        "SKU": "22732",
-        "Preco pix": 6.1,
-        "Preco venda": 6.29,
-        "URL": "https://www.farmaponte.com.br/powerade-limao-500ml/p",
-        "EAN": "7894900500035",
-        "Marca": "Powerade"
-    },
-    {
-        "Nome do produto": "Isot\u00f4nico Powerade Sabor Frutas Tropicais 500ml",
-        "Desconto": 10,
-        "Preco unitario": 6.99,
-        "SKU": "24813",
-        "Preco pix": 6.1,
-        "Preco venda": 6.29,
-        "URL": "https://www.farmaponte.com.br/isotonico-powerade-sabor-frutas-tropicais-500ml/p",
-        "EAN": "7894900508017",
-        "Marca": "Sem marca"
-    },
-    {
         "Nome do produto": "Kimera Thermo Iridium Labs 300mg 60 Comprimidos",
         "Desconto": 30,
         "Preco unitario": 79.12,
@@ -748,17 +715,6 @@
         "Marca": "Dux Nutrition"
     },
     {
-        "Nome do produto": "Isot\u00f4nico Powerade Mountain Blast 500ml",
-        "Desconto": 10,
-        "Preco unitario": 6.99,
-        "SKU": "24783",
-        "Preco pix": 6.1,
-        "Preco venda": 6.29,
-        "URL": "https://www.farmaponte.com.br/isotonico-powerade-mountain-blast-500ml/p",
-        "EAN": "7894900504002",
-        "Marca": "Sem marca"
-    },
-    {
         "Nome do produto": "Whey Protein Shake Dux Doce de Leite 250ml",
         "Desconto": 10,
         "Preco unitario": 9.89,
@@ -801,6 +757,50 @@
         "URL": "https://www.farmaponte.com.br/whey-protein-dux-chocolate-branco-250ml/p",
         "EAN": "7898641074503",
         "Marca": "Dux Nutrition"
+    },
+    {
+        "Nome do produto": "Isot\u00f4nico Powerade Lim\u00e3o 500ml",
+        "Desconto": 10,
+        "Preco unitario": 6.99,
+        "SKU": "22732",
+        "Preco pix": 6.1,
+        "Preco venda": 6.29,
+        "URL": "https://www.farmaponte.com.br/powerade-limao-500ml/p",
+        "EAN": "7894900500035",
+        "Marca": "Powerade"
+    },
+    {
+        "Nome do produto": "Isot\u00f4nico Powerade Mountain Blast 500ml",
+        "Desconto": 10,
+        "Preco unitario": 6.99,
+        "SKU": "24783",
+        "Preco pix": 6.1,
+        "Preco venda": 6.29,
+        "URL": "https://www.farmaponte.com.br/isotonico-powerade-mountain-blast-500ml/p",
+        "EAN": "7894900504002",
+        "Marca": "Sem marca"
+    },
+    {
+        "Nome do produto": "Isot\u00f4nico Powerade Sabor Frutas Tropicais 500ml",
+        "Desconto": 10,
+        "Preco unitario": 6.99,
+        "SKU": "24813",
+        "Preco pix": 6.1,
+        "Preco venda": 6.29,
+        "URL": "https://www.farmaponte.com.br/isotonico-powerade-sabor-frutas-tropicais-500ml/p",
+        "EAN": "7894900508017",
+        "Marca": "Sem marca"
+    },
+    {
+        "Nome do produto": "Go Energy Now Gel Guarana Com Acai 30gr",
+        "Desconto": 10,
+        "Preco unitario": 4.82,
+        "SKU": "25480",
+        "Preco pix": 4.21,
+        "Preco venda": 4.34,
+        "URL": "https://www.farmaponte.com.br/go-energy-now-gel-guarana-com-acai-30gr/p",
+        "EAN": "7899621106573",
+        "Marca": "Sem marca"
     },
     {
         "Nome do produto": "Nutren Senior Sem Sabor 740 Gramas",

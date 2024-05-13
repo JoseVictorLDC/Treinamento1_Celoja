@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-# caminhoArquivo = "dadosFarmaPonte/dadosFarmaPonteMamae-e-bebe.json"
+caminhoArquivo = "dadosDrogariaMinasMais/dadosJSON/dadosDrogariaMinasMais.json"
 
 # Verifica quantos produtos foram gravados.
 def verificaQuantidadeItens(caminhoArquivo):
@@ -11,8 +11,8 @@ def verificaQuantidadeItens(caminhoArquivo):
         dados = json.load(arquivo)
     return len(dados)
 
-# if __name__ == "__main__":
-#     print(verificaQuantidadeItens(caminhoArquivo))
+if __name__ == "__main__":
+    print(verificaQuantidadeItens(caminhoArquivo))
 
 # Coleta as categorias dos produtos.
 def coletaCategorias():
