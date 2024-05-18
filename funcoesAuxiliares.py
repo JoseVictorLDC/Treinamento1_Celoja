@@ -2,8 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import os
+import pandas as pd
 
-caminhoArquivo = "dadosDrogariaMinasMais/dadosJSON/dadosDrogariaMinasMais.json"
+# caminhoArquivo = "dadosFarmaPonte/dadosJSON/dadosFarmaPonteSuplementos.json"
+caminhoArquivo = "dadosSaoJoaoFarmacia/dadosJSON/saoJoaoFarmacia.json"
 
 # Verifica quantos produtos foram gravados.
 def verificaQuantidadeItens(caminhoArquivo):
@@ -81,3 +83,11 @@ def limpaTela():
         os.system('cls') # Para Windows
     else:
         os.system('clear') # Para Linux
+    
+# Transforma json em xlsx.
+def jsonToXlsx(caminhoArquivoJSON, carminhoArquivoXLSX):
+    with open(caminhoArquivoJSON, 'r') as file:
+        dados = json.load(file)
+    df = pd.DataFrame(dados)
+    df.to_excel(carminhoArquivoXLSX, index=False)
+    
