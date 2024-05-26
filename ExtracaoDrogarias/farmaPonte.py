@@ -4,7 +4,9 @@ import json
 import os
 import time
 import pandas as pd
-from funcoesAuxiliares import finalizaExtracao, escolheCategoria, retornaTempoDeExecucaoFormatado, limpaTela
+if __name__ != "__main__":
+    from ExtracaoDrogarias.funcoesAuxiliares import finalizaExtracao, escolheCategoria, retornaTempoDeExecucaoFormatado, limpaTela, finalizaExtracaoStreamlit
+    import streamlit as st
 
 def extracaoDeDados(categoria="saude"):
     inicio = time.time()
@@ -18,6 +20,9 @@ def extracaoDeDados(categoria="saude"):
     
     # Itera por todas as páginas existentes na categoria.
     paginasExtraidas = 0
+    if __name__ != "__main__":
+        barraDeProgresso = st.progress(0)
+        statusDoProgresso = st.empty()
     for pagina in range(1, numPaginas+1):
         while True:
             try:
@@ -86,28 +91,38 @@ def extracaoDeDados(categoria="saude"):
             print("Iniciando extração dos produtos")
             print(f"url: https://www.farmaponte.com.br/{categoria}/")
             print(f"Progresso da extração: {progressoTotal:.2f}%\n")
+            if __name__ != "__main__":
+                barraDeProgresso.progress(progressoTotal/100)
+                statusDoProgresso.write(f"Progresso da extração: {progressoTotal:.2f}%\n")
         paginasExtraidas += 1
 
-
     # Define o caminho do arquivo no qual serão gravados os dados json.
-    caminhoArquivoJSON = f"dadosFarmaPonte/dadosJSON/dadosFarmaPonte{categoria.capitalize()}.json"
+    caminhoArquivoJSON = f"ExtracaoDrogarias/dadosFarmaPonte/dadosJSON/dadosFarmaPonte{categoria.capitalize()}.json"
 
     # Grava os dados em formato JSON.
     with open(caminhoArquivoJSON, 'w') as arquivo:
         json.dump(dados, arquivo, indent=4)
 
+
     # Grava os dados em formato XLSX.
     df = pd.DataFrame(dados)
-    caminhoArquivoExcel = f"dadosFarmaPonte/dadosXLSX/dadosFarmaPonte{categoria.capitalize()}.xlsx"
+    caminhoArquivoExcel = f"ExtracaoDrogarias/dadosFarmaPonte/dadosXLSX/dadosFarmaPonte{categoria.capitalize()}.xlsx"
     df.to_excel(caminhoArquivoExcel, index=False)
 
+    # Calcula tempo e prepara para uma melhor exibição.
     fim = time.time()
     tempoExecucao = fim - inicio
     tempoExecucaoFormatado = retornaTempoDeExecucaoFormatado(tempoExecucao=tempoExecucao)
+
+    # Exibe dados finais sobre a extração.
+    if __name__ != "__main__":
+        st.success("Extração finalizada, os dados extraídos já estão atualizados na área de visualização!", icon="✅")
+        with st.expander("Estatísticas sobre a extração"):
+            finalizaExtracaoStreamlit(numPaginas, caminhoArquivoJSON, tempoExecucaoFormatado)
     finalizaExtracao(numPaginas, caminhoArquivoJSON, caminhoArquivoExcel, tempoExecucaoFormatado)
 
-categoriaEscolhida = escolheCategoria()
 
-extracaoDeDados(categoria=categoriaEscolhida)
-
-
+if __name__ == "__main__":
+    from funcoesAuxiliares import finalizaExtracao, escolheCategoria, retornaTempoDeExecucaoFormatado, limpaTela
+    categoriaEscolhida = escolheCategoria()
+    extracaoDeDados(categoria=categoriaEscolhida)

@@ -3,9 +3,11 @@ import requests
 import json
 import os
 import pandas as pd
+if __name__ != '__main__':
+    import streamlit as st
 
 # caminhoArquivo = "dadosFarmaPonte/dadosJSON/dadosFarmaPonteSuplementos.json"
-caminhoArquivo = "dadosSaoJoaoFarmacia/dadosJSON/saoJoaoFarmacia.json"
+caminhoArquivo = "ExtracaoDrogarias/dadosSaoJoaoFarmacia/dadosJSON/saoJoaoFarmacia.json"
 
 # Verifica quantos produtos foram gravados.
 def verificaQuantidadeItens(caminhoArquivo):
@@ -39,6 +41,12 @@ def finalizaExtracao(numPaginas, caminhoArquivoJSON, caminhoArquivoCSV, tempoExe
     print(f"- {verificaQuantidadeItens(caminhoArquivoJSON)} produtos")
     print(f"{tempoExecucaoFormatado}\n")
     print(f"Confira os dados no arquivo {caminhoArquivoJSON} ou {caminhoArquivoCSV}\n")
+
+# Exibe algumas estatísticas no dialog do Streamlit.
+def finalizaExtracaoStreamlit(numPaginas, caminhoArquivoJSON, tempoExecucaoFormatado):
+    st.write(f"- {numPaginas} páginas")
+    st.write(f"- {verificaQuantidadeItens(caminhoArquivoJSON)} produtos")
+    st.write(f"{tempoExecucaoFormatado}")
 
 # Solicita ao usuário para que informe a categoria que ele deseja a extração.
 def escolheCategoria():
