@@ -98,4 +98,14 @@ def jsonToXlsx(caminhoArquivoJSON, carminhoArquivoXLSX):
         dados = json.load(file)
     df = pd.DataFrame(dados)
     df.to_excel(carminhoArquivoXLSX, index=False)
-    
+
+# Retorna os caminhos dos arquivos xlsx.
+def coletaArquivosXLSX():
+    caminhos = []
+    caminhoDiretorio = 'ExtracaoDrogarias'
+    for diretorioAtual, subdiretorios, arquivos in os.walk(caminhoDiretorio):
+        for nomeArquivo in arquivos:
+            if nomeArquivo.endswith('.xlsx'):
+                caminhoCompleto = os.path.join(diretorioAtual, nomeArquivo)
+                caminhos.append(caminhoCompleto)
+    return caminhos

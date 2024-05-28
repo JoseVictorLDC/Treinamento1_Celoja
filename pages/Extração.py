@@ -2,6 +2,10 @@ import streamlit as st
 from ExtracaoDrogarias.funcoesAuxiliares import coletaCategorias, retornaNumeroDePaginas
 from ExtracaoDrogarias.farmaPonte import extracaoDeDados
 from ExtracaoDrogarias import drogariaSaoJoao as sj
+from ExtracaoDrogarias import extracaoMinasMaiscopia as mm
+
+with st.sidebar:
+  st.image("imagens/Logo_Celoja.png", width=150)
 
 st.title("Extração")
 
@@ -10,7 +14,6 @@ farmacia_escolhida = st.selectbox(label="Você gostaria de extrair dados de qual
 # Dialog que abre quando o usuário escolhe a categoria para extração.
 @st.experimental_dialog("Extração")
 def exibeProgressoFP(categoria):
-    print(categoria)
     st.write(f"Iniciando extração dos produtos da categoria {categoria}")
     st.write(f"url: https://www.farmaponte.com.br/{categoria}/")
     extracaoDeDados(categoria)
@@ -20,6 +23,12 @@ def exibeProgressoSJ():
     st.write(f"Iniciando extração dos produtos da Farmácias São João")
     st.write(f"url: https://www.saojoaofarmacias.com.br/medicamentos/")
     sj.extracaoDeDados()
+
+@st.experimental_dialog("Extração")
+def exibeProgressoMM():
+    st.write(f"Iniciando extração dos produtos da Drogaria Minas Mais")
+    st.write(f"url: https://www.drogariasminasmais.com.br/medicamentos")
+    mm.extracaoDeDados()
 
 
 # Interface para a Farma Ponte
@@ -52,4 +61,10 @@ if farmacia_escolhida == "Farmácias São João":
     if st.session_state["iniciar"] == True:
         exibeProgressoSJ()
 
+# Interface para Drogaria Minas Mais.
+if farmacia_escolhida == "Drogaria Minas Mais":
+    st.write(farmacia_escolhida)
+    st.button(label=f"Iniciar extração", use_container_width=True, key="iniciar")
+    if st.session_state["iniciar"] == True:
+        exibeProgressoMM()
 # st.write(st.session_state)
